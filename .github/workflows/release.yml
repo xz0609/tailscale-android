@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: sudosubin/git-clone-action@v1.0.1
         with:
@@ -35,5 +35,5 @@ jobs:
         with:
           tag_name: latest
           files: tailscale-debug.apk
-          release: true
+          #release: true
           repository: ${{ github.actor }}/tailscale-android
