@@ -40,7 +40,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: ${{ success() }}
         with:
-          tag_name: latest
+          tag_name: latest,${{ steps.ver.outputs.version }}
           files: tailscale-debug.apk
           #release: true
           repository: ${{ github.actor }}/tailscale-android
