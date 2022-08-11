@@ -24,6 +24,13 @@ jobs:
 #          sed -i '/backend.SetNotifyCallback/a\ \ \ \ \ \ \ \ prefs := ipn.NewPrefs()\n\ \ \ \ \ \ \ \ prefs.ControlURL = "'"${{ secrets.HEADSCALE_URL }}"'"\n\ \ \ \ \ \ \ \ opts := ipn.Options{\n\ \ \ \ \ \ \ \ StateKey: "ipn-android",\n\ \ \ \ \ \ \ \ \ \ \ \ UpdatePrefs: prefs,\n\ \ \ \ \ \ \ \ }\n\ \ \ \ \ \ \ \ return b.backend.Start(opts)' cmd/tailscale/backend.go
 #          sed -i 's/Sign in with other/Sign in with Headscale/g' cmd/tailscale/ui.go
 
+      - name: get version
+        id: ver
+        run: |
+          version = $(grep -E -o '[0-9]+.[0-9]+.[0-9]+-(.*)-[A-Za-z0-9]+' ./android/build.gradle)
+          echo $version
+          echo "::set-output name=version::$version"
+
       - name: build
         run: |
           docker build -t tailscale-android .
