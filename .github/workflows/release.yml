@@ -36,6 +36,12 @@ jobs:
       #    docker build -t tailscale-android .
       #    docker run -v ${PWD}:/build/tailscale-android --rm tailscale-android make tailscale-debug.apk
 
+      - name: Switch to Java 17 # Note: 17 is pre-installed on ubuntu-latest
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Build APK
         run: make tailscale-debug.apk
 
