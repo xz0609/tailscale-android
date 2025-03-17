@@ -24,11 +24,11 @@ jobs:
 #          sed -i '/backend.SetNotifyCallback/a\ \ \ \ \ \ \ \ prefs := ipn.NewPrefs()\n\ \ \ \ \ \ \ \ prefs.ControlURL = "'"${{ secrets.HEADSCALE_URL }}"'"\n\ \ \ \ \ \ \ \ opts := ipn.Options{\n\ \ \ \ \ \ \ \ StateKey: "ipn-android",\n\ \ \ \ \ \ \ \ \ \ \ \ UpdatePrefs: prefs,\n\ \ \ \ \ \ \ \ }\n\ \ \ \ \ \ \ \ return b.backend.Start(opts)' cmd/tailscale/backend.go
 #          sed -i 's/Sign in with other/Sign in with Headscale/g' cmd/tailscale/ui.go
 
+# version=$(grep -E -o '[0-9]+.[0-9]+.[0-9]+-(.*)-[A-Za-z0-9]+' ./android/build.gradle)
+#                       tailscale.com v1.81.0-pre.0.20250313173742-f0b395d851bb    
       - name: get version
         id: ver
         run: |
-# version=$(grep -E -o '[0-9]+.[0-9]+.[0-9]+-(.*)-[A-Za-z0-9]+' ./android/build.gradle)
-#                       tailscale.com v1.81.0-pre.0.20250313173742-f0b395d851bb    
           version=$(grep -E -o 'tailscale.com (.*)-(.*)-[A-Za-z0-9]+' ./go.mod)
           echo ${version}
           echo "version=${version}" >> $GITHUB_OUTPUT
